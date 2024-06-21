@@ -18,6 +18,7 @@ const Admin: React.FC = () => {
   const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputImg(e.target.value);
   };
+  //submit
 
   const submit = async () => {
     try {
