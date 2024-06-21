@@ -4,7 +4,8 @@ import axios from 'axios';
 
 // Define a TypeScript interface for Task object
 interface Task {
-  name: string;
+  title: string;
+  img:string;
   content: string;
 }
 
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get<Task[]>('https://restapi-hsoe.onrender.com/tasks');
+        const response = await axios.get<Task[]>('https://restapi-hsoe.onrender.com/blogs');
         setTasks(response.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -33,7 +34,8 @@ const Home: React.FC = () => {
       <ul>
         {tasks.map((task, index) => (
           <div key={index}>
-            <h3>{task.name}</h3>
+            <h3>{task.title}</h3>
+            <img src={task.img} style={{height:'100px',width:'100px'}}/>
             <p>{task.content}</p>
           </div>
         ))}

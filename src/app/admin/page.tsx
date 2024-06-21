@@ -3,25 +3,32 @@ import axios from 'axios';
 import React, { useState, ChangeEvent } from 'react';
 
 const Admin: React.FC = () => {
-  const [inputName, setInputName] = useState<string>('');
+  const [inputtitle, setInputTitle] = useState<string>('');
   const [inputContent, setInputContent] = useState<string>('');
+  const [inputimg,setInputImg] = useState<string>('');
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputName(e.target.value);
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputTitle(e.target.value);
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputContent(e.target.value);
   };
 
+  const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputImg(e.target.value);
+  };
+
   const submit = async () => {
     try {
-      const response = await axios.post('https://restapi-hsoe.onrender.com/tasks', {
-        name: inputName,
+      const response = await axios.post('https://restapi-hsoe.onrender.com/blogs', {
+        title: inputtitle,
+        img:inputimg,
         content: inputContent,
       });
       console.log('Response:', response.data); 
-      setInputName('');
+      setInputTitle('');
+      setInputImg('');
       setInputContent('');
     } catch (error) {
       console.error('Error submitting:', error);
@@ -31,10 +38,16 @@ const Admin: React.FC = () => {
   return (
     <div>
       <input
-        placeholder='name'
-        value={inputName}
-        onChange={handleNameChange}
-        name='name'
+        placeholder='title'
+        value={inputtitle}
+        onChange={handleTitleChange}
+        name='title'
+      />
+      <input
+        placeholder='img'
+        value={inputimg}
+        onChange={handleImgChange}
+        name='img'
       />
       <input
         placeholder='content'
